@@ -20,7 +20,7 @@ class Methods:
         birthday =  birth_date + relativedelta(years=age)
 
         if birthday > datetime.today():
-            age = age = -1
+            age = age -1
         
         return age
     
