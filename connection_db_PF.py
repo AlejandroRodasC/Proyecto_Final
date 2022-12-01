@@ -17,3 +17,20 @@ class Connection:
     def list_students(cursor):
         request =  ('SELECT name_st , career , age , poem_genre , participation from Students')
         cursor.execute(request)
+    
+    def list_students_for_career(cursor,data):
+        request =  ('SELECT * from Students where career = %s')
+        cursor.execute(request,data)
+    
+    def list_students_for_age(cursor,data):
+        request =  ('SELECT * from Students where age > %s')
+        cursor.execute(request,data)
+    
+    def list_students_for_poem_genre(cursor,data):
+        request =  ('SELECT * from Students where poem_genre = %s')
+        cursor.execute(request,data)
+    
+    def list_students_for_participation(cursor,data):
+        request =  ('SELECT * from Students where participation = %s')
+        cursor.execute(request,data)
+    

@@ -27,17 +27,32 @@ class Methods:
     def calculate_date_participation(enrollment,carnet,poem_gener):
         last_digit =  carnet[5:6]
         
-        if last_digit == '1' and poem_gener == 'dramático':
+        if last_digit == '1' and poem_gener == 'dramática':
             participation = enrollment + timedelta(days=5)
 
             if participation.weekday() == 5: # if that day is saturday
                 participation = participation + timedelta(days=2)
+                year1 = participation.year 
+                month1= participation.month
+                day1= participation.day
+                participation1 =  datetime(year1,month1,day1,0,0,0,0)
                 return participation
 
             if participation.weekday() == 6: # if that day is sunday
                 participation = participation + timedelta(days=1)
-                return participation
+                year1 = participation.year 
+                month1= participation.month
+                day1= participation.day
+                participation1 =  datetime(year1,month1,day1,0,0,0,0)
+                return participation1
+            
+            year1 = participation.year 
+            month1= participation.month
+            day1= participation.day
+            participation1 =  datetime(year1,month1,day1,0,0,0,0)
+            return participation1
 
+        #If last digit is 3 and poem genre is épica
         if last_digit == '3' and poem_gener == 'épica':
             year = int(enrollment.year)
             month =  int(enrollment.month)
@@ -51,29 +66,30 @@ class Methods:
             if participation.weekday() == 6: # if that day is sunday
                 participation = participation + timedelta(days=1)
                 return participation
-            
+    
+        #In other cases    
         day = enrollment.weekday()
         if day == 0: 
             participation = enrollment + timedelta(days=4)
-            return participation
         elif day == 1:
             participation = enrollment + timedelta(days=3)
-            return participation
         elif day == 2:
             participation = enrollment + timedelta(days=2)
-            return participation
         elif day == 3:
             participation = enrollment + timedelta(days=1)
-            return participation
         elif day == 4:
             participation = enrollment + timedelta(weeks=1)
-            return participation
         elif day == 5:
             participation = enrollment + timedelta(days=6)
-            return participation
         elif day == 6:
             participation = enrollment + timedelta(days=5)
-            return participation
+        
+        year2 = participation.year 
+        month2= participation.month
+        day2= participation.day
+        participation2 =  datetime(year2,month2,day2,0,0,0,0)
+
+        return participation2
     
     def check_genre(gener):
         if gener not in ['masculino', 'femenino', 'otros']:

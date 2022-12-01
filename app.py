@@ -65,9 +65,52 @@ def register_user():
 @app.route('/list_of_students')
 def list_students():
     curs_students = conn.cursor(dictionary= True,buffered=True)
+    career = request.form['career']
+    age = request.form['age']
+    poem_genre = request.form['poem_genre']
+    participation = request.form['participation']
 
-    Connection.list_students(curs_students)
-    students = curs_students.fetchall()
-    curs_students.close()
+    if len(career)==0 and len(age) == 0 and len(poem_genre)==0 and len(participation) == 0:
+        Connection.list_students(curs_students)
+        students = curs_students.fetchall()
+        curs_students.close()
+    
+    #for career
+    if len(career)!=0 and len(age) == 0 and len(poem_genre)==0 and len(participation) == 0:
+        data = (career,)
+        Connection.list_students_for_career(curs_students,data)
+        students = curs_students.fetchall()
+        curs_students.close()
 
+    elif len(career)!=0 and (len(age) != 0 or len(poem_genre)!=0 or len(participation) != 0):
+        return 'Please only send one parameter to search.'
+    
+    #For age
+    if len(career)==0 and len(age) != 0 and len(poem_genre)==0 and len(participation) == 0:
+        int_age = int(age)
+        data = (int_age,)
+        Connection.list_students_for_age(curs_students,data)
+        students = curs_students.fetchall()
+        curs_students.close()
+    elif len(age)!=0 and (len(career) != 0 or len(poem_genre)!=0 or len(participation) != 0):
+        return 'Please only send one parameter to search.'
+    
+    #For poem genre
+    if len(career)==0 and len(age) == 0 and len(poem_genre)!=0 and len(participation) == 0:
+        data = (poem_genre,)
+        Connection.list_students_for_poem_genre(curs_students,data)
+        students = curs_students.fetchall()
+        curs_students.close()
+    elif len(poem_genre)!=0 and (len(career) != 0 or len(age)!=0 or len(participation) != 0):
+        return 'Please only send one parameter to search.'
+
+    #For date participacion
+    if len(career)==0 and len(age) == 0 and len(poem_genre)==0 and len(participation) != 0:
+        data = (participation,)
+        Connection.list_students_for_participation(curs_students,data)
+        students = curs_students.fetchall()
+        curs_students.close()
+    elif len(participation)!=0 and (len(career) != 0 or len(age)!=0 or len(poem_genre) != 0):
+        return 'Please only send one parameter to search.'
+    
     return students
