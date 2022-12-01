@@ -1,7 +1,7 @@
 from flask import Flask, request
 from datetime import datetime
 from connection_db_PF import Connection
-from methods import Methods
+from methods_PF import Methods
 app = Flask(__name__)
 conn = Connection.connect_db()
 
@@ -27,6 +27,7 @@ def register_user():
     flag_carnet = Methods.check_carnet(carnet)
     flag_genre =  Methods.check_genre(genre)
     flag_poem = Methods.check_poem_genre(poem_genre)
+    flag_phone_number =  Methods.check_phone_number(pnum)
     if len(carnet)==0:
         return 'The carnet field is required.'
     if len(name) ==0:
@@ -39,6 +40,8 @@ def register_user():
         return 'Invalid genre.'
     if len(pnum) ==0:
         return 'The phone number field is required.'
+    if flag_phone_number:
+        return 'The phone number has invalid characters.'
     if birth_date is None:
         return 'The birthdate field is required.'
     if len(career) ==0:

@@ -78,9 +78,21 @@ class Methods:
     def check_genre(gener):
         if gener not in ['masculino', 'femenino', 'otros']:
             return True
-        else: return False
+        else: 
+            return False
     
     def check_poem_genre(poem_genre):
         if poem_genre not in ['lírica', 'épica', 'dramática']:
             return True
-        else: return False
+        else: 
+            return False
+    
+    def check_phone_number(phone_number):
+        if len(phone_number)>8:
+            return True
+        
+        pat  = r"[0-9]{8}"
+        if re.match(pat,phone_number):
+            return False
+        else:
+            return True
