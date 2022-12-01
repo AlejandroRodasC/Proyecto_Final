@@ -15,5 +15,5 @@ class Connection:
         connec.commit()
     
     def list_students(cursor):
-        request =  ('SELECT name_st , career , age , poem_gener , participation from Students')
+        request =  ('SELECT name_st , career , age , poem_genre , participation from Students')
         cursor.execute(request)
