@@ -14,6 +14,7 @@ def register_user():
     carnet =  request.form['carnet']
     name = request.form['name_student']
     address = request.form['address']
+    genre = request.form['genre']
     pnum= request.form['phone_number']
     birth_date = datetime.strptime(request.form['birth_date'], '%d/%m/%Y')
     age = int(Methods.calculate_age(birth_date))  
@@ -24,12 +25,18 @@ def register_user():
     
     #Verifications
     flag_carnet = Methods.check_carnet(carnet)
+    flag_genre =  Methods.check_genre(genre)
+    flag_poem = Methods.check_poem_genre(poem_genre)
     if len(carnet)==0:
         return 'The carnet field is required.'
     if len(name) ==0:
         return 'The name field is required.'
     if len(address) ==0:
         return 'The address field is required.'
+    if len(genre) ==0:
+        return 'The genre field is required.'
+    if flag_genre:
+        return 'Invalid genre.'
     if len(pnum) ==0:
         return 'The phone number field is required.'
     if birth_date is None:
@@ -38,12 +45,14 @@ def register_user():
         return 'The career field is required.'
     if len(poem_genre) ==0:
         return 'The poem genre field is required.'
+    if flag_poem:
+        return 'Invalid poem genre.'
     if flag_carnet:
         return 'The carnet is invalid.'
     if age <= 17:
         return f'You need to be 18 years old, you have {age} years old.'
 
-    data = (carnet, name , address , pnum , birth_date , age , career , poem_genre , enrollment , participation)
+    data = (carnet, name , address ,genre, pnum , birth_date , age , career , poem_genre , enrollment , participation)
     curs_users = conn.cursor()
     Connection.insert_student(data)
     curs_users.close()

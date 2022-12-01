@@ -8,8 +8,8 @@ class Connection:
     
     def insert_student(data):
         connec = conn.connect(host='localhost', user='root', passwd = 'alejandro', db='poesia')
-        request =( 'INSERT INTO Students (carnet , name_st , address , phone_number , birth_date , age , career , poem_genre , enrollment , participation)' 
-                ' VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)' )
+        request =( 'INSERT INTO Students (carnet , name_st , address , genre , phone_number , birth_date , age , career , poem_genre , enrollment , participation)' 
+                ' VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)' )
         cursor = connec.cursor()
         cursor.execute(request,data)
         connec.commit()

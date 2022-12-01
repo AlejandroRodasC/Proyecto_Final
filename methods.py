@@ -74,3 +74,13 @@ class Methods:
         elif day == 6:
             participation = enrollment + timedelta(days=5)
             return participation
+    
+    def check_genre(gener):
+        if gener not in ['masculino', 'femenino', 'otros']:
+            return True
+        else: return False
+    
+    def check_poem_genre(poem_genre):
+        if poem_genre not in ['lírica', 'épica', 'dramática']:
+            return True
+        else: return False
