@@ -9,7 +9,7 @@ class Methods:
         if len(carnet)>6:
             return True
         
-        pat  = r"A[a-zA-Z0-9]{3}5(1|3|9){1}"
+        pat  = r"A[a-zA-Z1-9]{3}5(1|3|9){1}"
         if re.match(pat,carnet):
             return False
         else:
